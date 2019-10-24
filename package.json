@@ -1,11 +1,7 @@
 {
-  "name": "testcafe-cucumber",
+  "name": "PPA",
   "version": "0.1.0",
   "description": "An integration of TestCafe and CucumberJS",
-  "author": "Ryan Quellhorst <rquellh@gmail.com>",
-  "contributors": [
-    "Chirag Masekar"
-  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -13,7 +9,7 @@
   },
   "scripts": {
     "debug": "node --inspect=1337 --debug-brk --nolazy node_modules/cucumber/bin/cucumber-js --tags @debug --format json:./reports/report.json",
-    "test": "./node_modules/.bin/cucumber-js.cmd",
+    "test": "cucumber cucumber:rerun report",
     "test-report": "./node_modules/.bin/cucumber-js.cmd --format json:./reports/report.json",
     "test-chrome": "./node_modules/.bin/cucumber-js.cmd  --world-parameters \"{\\\"browser\\\": \\\"chrome\\\"}\"",
     "test-ie": "./node_modules/.bin/cucumber-js.cmd  --world-parameters \"{\\\"browser\\\": \\\"ie\\\"}\"",
@@ -28,16 +24,22 @@
     "test-opera-report": "./node_modules/.bin/cucumber-js.cmd  --format json:./reports/report.json --world-parameters \"{\\\"browser\\\": \\\"opera\\\"}\"",
     "test-safari-report": "./node_modules/.bin/cucumber-js.cmd  --format json:./reports/report.json --world-parameters \"{\\\"browser\\\": \\\"safari\\\"}\"",
     "test-chrome-headless": "./node_modules/.bin/cucumber-js.cmd  --world-parameters \"{\\\"browser\\\": \\\"chrome:headless\\\"}\"",
-    "test-firefox-headless": "./node_modules/.bin/cucumber-js.cmd  --world-parameters \"{\\\"browser\\\": \\\"firefox:headless\\\"}\""
+    "test-firefox-headless": "./node_modules/.bin/cucumber-js.cmd  --world-parameters \"{\\\"browser\\\": \\\"firefox:headless\\\"}\"",
+    "cucumber": "del reports\\*.json && cucumber-js -f rerun:@rerun.txt -f progress-bar -f json:reports/cucumber_report.json --parallel=5",
+    "cucumber:rerun": "cucumber-js @rerun.txt -f progress-bar -f json:reports/cucumber_report_rerun.json",
+    "report": "node report-generator.js"
   },
   "dependencies": {
     "base64-img": "^1.0.4",
-    "cucumber": "^5.1.0",
     "eslint": "^4.19.1",
     "npm": "^6.0.0",
-    "testcafe": "^1.1.0"
+    "testcafe": "^1.1.0",
+    "testcafe-reporter-cucumber-json": "^4.0.0"
   },
   "devDependencies": {
-    "eslint-config-google": "^0.9.1"
+    "cucumber": "^5.1.0",
+    "cucumber-html-reporter": "^5.0.2",
+    "eslint-config-google": "^0.9.1",
+    "multiple-cucumber-html-reporter": "^1.13.1"
   }
 }
